@@ -18,8 +18,7 @@ export class HelloComponent implements OnInit {
     
     // Inject your confirmation dialog
     private confirmationDialogService: ConfirmationDialogService
-    ) {     
-  }
+    ) { }
 
   ngOnInit(): void {
     // onInit and Constructor difference
