@@ -26,6 +26,8 @@ export class CovidComponent implements OnInit {
 
   public updateDesc: any;
 
+  public postDesc: any;
+
   constructor(
     private httpClient: HttpClient,
     public covidApiService: CovidApiService,
@@ -36,6 +38,7 @@ export class CovidComponent implements OnInit {
   ngOnInit(): void {
     this.descObject = {};
     this.updateDesc = {};
+    this.postDesc = {};
     this.getCovid();
     this.getCovidDesc();
 
@@ -112,11 +115,23 @@ export class CovidComponent implements OnInit {
     }
   }
 
+  // TODO: Practical 7 - complete the backend implementation only below
   putDesc() {
 
     this.covidApiService.putDesc(this.updateDesc).then(
       resolve => {
         this.getCovidDesc();
       });
+  }
+
+  // TODO: Practical 7 - complete the implementation below
+  // It should have a promise sync function 
+
+  addPost() {
+    this.covidApiService.addPost(this.postDesc).then(
+      resolve => {
+    // if the method below being called using async way, then the table desc wont be updated accordingly after data added
+    this.getCovidDesc();   
+  });
   }
 }
