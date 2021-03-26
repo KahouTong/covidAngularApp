@@ -74,4 +74,15 @@
 
   <input type="submit" value="Post" (click)="addPost()">
 <!-- Add Post ends  -->
+
+  <!-- Delete Description starts  -->
+  <br><br><br>
+  <legend style="color:black;font-weight:bold;">Section E. Delete Description Record</legend>
+
+  <label for="Description">Description</label>
+  <input type="text" id="desc" [(ngModel)]="newDesc" name="desc">
+  <p></p>
+
+  <input type="submit" value="DeleteByDesc" (click)="deleteDescSoap()">
+<!-- Delete Description ends  -->
 </div>

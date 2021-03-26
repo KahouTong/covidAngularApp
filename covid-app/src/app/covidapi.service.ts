@@ -90,4 +90,20 @@ export class CovidApiService {
       })
     });
   }
+
+  public deleteDescSoap(desc: string): Promise<any>  {
+    // body.description = body.desc;
+    return new Promise((resolve) => {
+    return this.httpClient.delete(`http://localhost:8081/covid/delete/soap?desc=`+ desc).subscribe((data: any) => {
+      console.log(data);
+      resolve(data);
+    }
+      ,
+      (error) => {
+        console.log(error);
+        this.confirmationDialogService.confirm(GlobalConstants.errorMessage, GlobalMethods.getError(error));
+      })
+    });
+  }
+
 }

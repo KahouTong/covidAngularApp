@@ -134,4 +134,19 @@ export class CovidComponent implements OnInit {
     this.getCovidDesc();   
   });
   }
+
+  deleteDescSoap() {
+    console.log("covidTotalDesc length-->" + this.covidTotalDesc.length);
+
+    if (this.covidTotalDesc.length == 0) {
+      this.confirmationDialogService.confirm(GlobalConstants.errorMessageFE, "List is Empty");
+    }
+    else {
+      this.covidApiService.deleteDescSoap(this.newDesc).then(
+        resolve => {
+          this.getCovidDesc();
+        });
+    }
+  }
+
 }
