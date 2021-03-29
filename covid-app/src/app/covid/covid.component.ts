@@ -28,6 +28,8 @@ export class CovidComponent implements OnInit {
 
   public postDesc: any;
 
+  public temp: any;
+
   constructor(
     private httpClient: HttpClient,
     public covidApiService: CovidApiService,
@@ -39,13 +41,18 @@ export class CovidComponent implements OnInit {
     this.descObject = {};
     this.updateDesc = {};
     this.postDesc = {};
+    await this.getCovidInit();
+    this.descObject = this.temp;
     this.getCovid();
     this.getCovidDesc();
-   await this.covidApiService.getCovidDesc().toPromise().then((data: any) => {
-      this.descObject = data;
-    });
     console.log("Covid Component Inited");
     console.log("Total of Description Column Row --->" + this.descObject.length);
+  }
+
+  async getCovidInit(): Promise<any> {
+    return this.descObject = await this.covidApiService.getCovidDesc().toPromise().then((data: any) => {
+      this.temp = data;
+      });
   }
 
   getCovid(): any {
