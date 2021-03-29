@@ -35,13 +35,15 @@ export class CovidComponent implements OnInit {
 
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.descObject = {};
     this.updateDesc = {};
     this.postDesc = {};
     this.getCovid();
     this.getCovidDesc();
-
+   await this.covidApiService.getCovidDesc().toPromise().then((data: any) => {
+      this.descObject = data;
+    });
     console.log("Covid Component Inited");
     console.log("Total of Description Column Row --->" + this.descObject.length);
   }
