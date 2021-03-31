@@ -7,24 +7,18 @@ import { GlobalMethods } from 'src/environments/GlobalMethods';
 @Injectable({
   providedIn: 'root'
 })
-export class CovidApiService {
+export class BonusService {
 
   constructor(private httpClient: HttpClient, private confirmationDialogService: ConfirmationDialogService) { }
 
-  private bonusUrl = 'http://localhost:8081/';
-// covid/get/latest
-  public getCovid(getCovidUrl: string): any {
-    return this.httpClient.get(this.bonusUrl+getCovidUrl, { responseType: 'text' });
-  }
-// covid/get/desc
-  public getCovidDesc(getDescUrl: string): any {
-    return this.httpClient.get(this.bonusUrl+getDescUrl);
+  public getCovidDesc(): any {
+    return this.httpClient.get(`http://localhost:8081/covid/get/bonus`);
   }
 
-  public deleteDesc(id: number, delUrl: string): Promise<any> {
-// covid/delete?id=
+  public deleteDesc(id: number): Promise<any> {
+
     return new Promise((resolve) => {
-      return this.httpClient.delete(this.bonusUrl+delUrl+id).subscribe((data: any) => {
+      return this.httpClient.delete(`http://localhost:8081/covid/delete/bonus?id=` + id).subscribe((data: any) => {
         console.log(data);
         resolve(data);
 
@@ -38,10 +32,10 @@ export class CovidApiService {
     });
   }
 
-  public addDesc(desc: string, addDescUrl: string): Promise<any> {
-// covid/add?desc=
+  public addDesc(bonus: string): Promise<any> {
+
     return new Promise((resolve) => {
-      return this.httpClient.get(this.bonusUrl+addDescUrl+ desc).subscribe((data: any) => {
+      return this.httpClient.get(`http://localhost:8081/covid/add/bonus?bonus=` + bonus).subscribe((data: any) => {
 
         console.log(data);
         resolve(data);
@@ -57,10 +51,10 @@ export class CovidApiService {
   }
 
 
-  public putDesc(body : any, putUrl: string): Promise<any> {
-// covid/put
+  public putDesc(body : any): Promise<any> {
+
     return new Promise((resolve) => {
-      return this.httpClient.put(this.bonusUrl+putUrl, body).subscribe((data: any) => {
+      return this.httpClient.put(`http://localhost:8081/covid/put/bonus`, body).subscribe((data: any) => {
 
         console.log(data);
         resolve(data);
@@ -75,13 +69,10 @@ export class CovidApiService {
     });
   }
 
-    // TODO: Practical 7 - complete the implementation below
-  // It should have a promise sync function 
-
-  public addPost(body: any, addPostUrl: string): Promise<any>  {
-    // body.description = body.desc; url = covid/post
+  public addPost(body: any): Promise<any>  {
+    // body.description = body.desc;
     return new Promise((resolve) => {
-    return this.httpClient.post(this.bonusUrl+addPostUrl, body).subscribe((data: any) => {
+    return this.httpClient.post(`http://localhost:8081/covid/post/bonus`, body).subscribe((data: any) => {
       console.log(data);
       resolve(data);
     }
@@ -93,10 +84,10 @@ export class CovidApiService {
     });
   }
 
-  public deleteDescSoap(desc: string, delSoapUrl: string): Promise<any>  {
-    // body.description = body.desc;covid/delete/soap?desc=
+  public deleteDescSoap(bonus: string): Promise<any>  {
+    // body.description = body.desc;
     return new Promise((resolve) => {
-    return this.httpClient.delete(this.bonusUrl+delSoapUrl+ desc).subscribe((data: any) => {
+    return this.httpClient.delete(`http://localhost:8081/covid/delete/soap/bonus?bonus=`+ bonus).subscribe((data: any) => {
       console.log(data);
       resolve(data);
     }
@@ -106,20 +97,6 @@ export class CovidApiService {
         this.confirmationDialogService.confirm(GlobalConstants.errorMessage, GlobalMethods.getError(error));
       })
     });
-  }
-
-  public deleteDuplicate(delSoapUrl: string): Promise<any>  {
-    return new Promise((resolve) => {
-      return this.httpClient.delete(this.bonusUrl+delSoapUrl).subscribe((data: any) => {
-        console.log(data);
-        resolve(data);
-      }
-        ,
-        (error) => {
-          console.log(error);
-          this.confirmationDialogService.confirm(GlobalConstants.errorMessage, GlobalMethods.getError(error));
-        })
-      });
   }
 
 }

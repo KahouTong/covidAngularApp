@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CovidApiService } from '../covidapi.service';
+// import { BonusService } from '../bonus.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { GlobalConstants } from 'src/environments/GlobalConstants';
 import { GlobalMethods } from 'src/environments/GlobalMethods';
-import { CovidCasesDesc } from 'src/model/CovidCasesDesc';
+import { CovidApiService } from '../covidapi.service';
 
 @Component({
-  selector: 'app-covid',
-  providers: [CovidApiService],
-  styleUrls: ['./covid.component.css'],
-  templateUrl: './covid.component.html',
+  selector: 'app-bonus',
+  styleUrls: ['./bonus.component.css'],
+  templateUrl: './bonus.component.html',
 
 })
-export class CovidComponent implements OnInit {
-  public covidTotalDaily: any;
+export class BonusComponent implements OnInit {
 
   public covidTotalDesc: any[] = [];
 
@@ -32,7 +30,7 @@ export class CovidComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient,
-    public covidApiService: CovidApiService,
+    public bonusService: CovidApiService,
     private confirmationDialogService: ConfirmationDialogService
 
   ) { }
@@ -43,34 +41,20 @@ export class CovidComponent implements OnInit {
     this.postDesc = {};
     await this.getCovidInit();
     this.descObject = this.temp;
-    this.getCovid();
     this.getCovidDesc();
     console.log("Covid Component Inited");
     console.log("Total of Description Column Row --->" + this.descObject.length);
   }
 
   async getCovidInit(): Promise<any> {
-    return this.descObject = await this.covidApiService.getCovidDesc('covid/get/desc').toPromise().then((data: any) => {
+    return this.descObject = await this.bonusService.getCovidDesc('covid/get/bonus').toPromise().then((data: any) => {
       this.temp = data;
       });
   }
 
-  getCovid(): any {
-    this.covidTotalDaily = this.covidApiService.getCovid('covid/get/latest').subscribe((data: any) => {
-      console.log(data); this.covidTotalDaily = data;
-    }
-      ,
-      (error: { error: { message: string; }; }) => {
-        console.log(error);
-        this.confirmationDialogService.confirm(GlobalConstants.errorMessage, GlobalMethods.getError(error));
-      }
-    );
-
-    return this.covidTotalDaily;
-  }
 
   getCovidDesc(): any {
-    this.covidApiService.getCovidDesc('covid/get/desc').subscribe((data: any) => {
+    this.bonusService.getCovidDesc('covid/get/bonus').subscribe((data: any) => {
       console.log(data);
       this.covidTotalDesc = data;
     });
@@ -95,7 +79,7 @@ export class CovidComponent implements OnInit {
       this.confirmationDialogService.confirm(GlobalConstants.errorMessageFE, "List is Empty");
     }
     else {
-      this.covidApiService.deleteDesc(this.descObject.id,'covid/delete?id=').then(
+      this.bonusService.deleteDesc(this.descObject.id,'covid/delete/bonus?id=').then(
         resolve => {
           this.getCovidDesc();
         });
@@ -105,7 +89,7 @@ export class CovidComponent implements OnInit {
   }
 
   addDesc() {
-    this.covidApiService.addDesc(this.newDesc,'covid/add?desc=').then(
+    this.bonusService.addDesc(this.newDesc,'covid/add/bonus?bonus=').then(
       resolve => {
         this.getCovidDesc();
       });
@@ -127,17 +111,14 @@ export class CovidComponent implements OnInit {
   // TODO: Practical 7 - complete the backend implementation only below
   putDesc() {
 
-    this.covidApiService.putDesc(this.updateDesc,'covid/put').then(
+    this.bonusService.putDesc(this.updateDesc,'covid/put/bonus').then(
       resolve => {
         this.getCovidDesc();
       });
   }
 
-  // TODO: Practical 7 - complete the implementation below
-  // It should have a promise sync function 
-
   addPost() {
-    this.covidApiService.addPost(this.postDesc,'covid/post').then(
+    this.bonusService.addPost(this.postDesc,'covid/post/bonus').then(
       resolve => {
     // if the method below being called using async way, then the table desc wont be updated accordingly after data added
     this.getCovidDesc();   
@@ -151,11 +132,18 @@ export class CovidComponent implements OnInit {
       this.confirmationDialogService.confirm(GlobalConstants.errorMessageFE, "List is Empty");
     }
     else {
-      this.covidApiService.deleteDescSoap(this.newDesc,'covid/delete/soap?desc=').then(
+      this.bonusService.deleteDescSoap(this.newDesc,'covid/delete/soap/bonus?bonus=').then(
         resolve => {
           this.getCovidDesc();
         });
     }
   }
 
+  deleteDuplicate(){
+    this.bonusService.deleteDuplicate('covid/delete/duplicate/bonus').then(
+      resolve => {
+    // if the method below being called using async way, then the table desc wont be updated accordingly after data added
+    this.getCovidDesc();   
+  });
+  }
 }
