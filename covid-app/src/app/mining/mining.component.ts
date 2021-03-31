@@ -6,7 +6,7 @@ import { MiningService } from '../mining.service';
 @Component({
   selector: 'app-mining',
   templateUrl: './mining.component.html',
-  styleUrls: ['./mining.component.css']
+  styleUrls: ['../../../src/app/shareCss/covid.component.css']
 })
 export class MiningComponent implements OnInit {
 

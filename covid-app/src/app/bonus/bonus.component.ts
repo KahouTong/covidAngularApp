@@ -3,12 +3,11 @@ import { Component, OnInit } from '@angular/core';
 // import { BonusService } from '../bonus.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { GlobalConstants } from 'src/environments/GlobalConstants';
-import { GlobalMethods } from 'src/environments/GlobalMethods';
 import { CovidApiService } from '../covidapi.service';
 
 @Component({
   selector: 'app-bonus',
-  styleUrls: ['./bonus.component.css'],
+  styleUrls: ['../../../src/app/shareCss/covid.component.css'],
   templateUrl: './bonus.component.html',
 
 })
@@ -125,25 +124,5 @@ export class BonusComponent implements OnInit {
   });
   }
 
-  deleteDescSoap() {
-    console.log("covidTotalDesc length-->" + this.covidTotalDesc.length);
 
-    if (this.covidTotalDesc.length == 0) {
-      this.confirmationDialogService.confirm(GlobalConstants.errorMessageFE, "List is Empty");
-    }
-    else {
-      this.bonusService.deleteDescSoap(this.newDesc,'covid/delete/soap/bonus?bonus=').then(
-        resolve => {
-          this.getCovidDesc();
-        });
-    }
-  }
-
-  deleteDuplicate(){
-    this.bonusService.deleteDuplicate('covid/delete/duplicate/bonus').then(
-      resolve => {
-    // if the method below being called using async way, then the table desc wont be updated accordingly after data added
-    this.getCovidDesc();   
-  });
-  }
 }

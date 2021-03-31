@@ -1,0 +1,19 @@
+<div class="container" role="main"> 
+  <!-- Delete Description starts  -->
+  <br><br><br>
+  <legend style="color:black;font-weight:bold;">Section E. Delete Description Record</legend>
+
+  <label for="Description">Description</label>
+  <input type="text" id="desc" [(ngModel)]="newDesc" name="desc">
+  <p></p>
+
+  <input type="submit" value="DeleteByDesc" (click)="deleteDescSoap()">
+<!-- Delete Description ends  -->
+
+  <!-- Delete Duplicate starts  -->
+  <br><br><br>
+  <legend style="color:black;font-weight:bold;">Section F. Delete Duplicate Record</legend>
+
+  <input type="submit" value="DeleteDuplicate" (click)="deleteDuplicate()">
+<!-- Delete Duplicate ends  -->
+</div>

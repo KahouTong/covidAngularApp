@@ -60,7 +60,7 @@
     </form>
     <!-- Put record Ends  -->
 
-      <!-- Add Post starts  -->
+    <!-- Add Post starts  -->
   <br><br><br>
   <legend style="color:black;font-weight:bold;">Section D. Add Post Record</legend>
 
@@ -69,23 +69,9 @@
   <p></p>
 
   <input type="submit" value="Post" (click)="addPost()">
-<!-- Add Post ends  -->
+    <!-- Add Post ends  -->
 
-  <!-- Delete Description starts  -->
-  <br><br><br>
-  <legend style="color:black;font-weight:bold;">Section E. Delete Description Record</legend>
-
-  <label for="Description">Description</label>
-  <input type="text" id="desc" [(ngModel)]="newDesc" name="desc">
-  <p></p>
-
-  <input type="submit" value="DeleteByDesc" (click)="deleteDescSoap()">
-<!-- Delete Description ends  -->
-
-  <!-- Delete Duplicate starts  -->
-  <br><br><br>
-  <legend style="color:black;font-weight:bold;">Section F. Delete Duplicate Record</legend>
-
-  <input type="submit" value="DeleteDuplicate" (click)="deleteDuplicate()">
-<!-- Delete Duplicate ends  -->
-  </div>
+    <!-- Section E and F Starts -->
+  <app-covidbonus-delete></app-covidbonus-delete>
+    <!-- Section E and F Ends -->
+</div>
