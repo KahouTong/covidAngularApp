@@ -9,9 +9,9 @@ export class GlobalMethods {
         if (error.status != undefined) {
             let status = error.status;
             switch (status){
-                case '404': return error.message;
-                case '500': return checkError(error);
-                case '0'  : return error.message;
+                case 404: return error.message;
+                case 500: return checkError(error);
+                case 0  : return error.message;
                 default   : break;
             }
         }
