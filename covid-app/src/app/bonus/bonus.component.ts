@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-// import { BonusService } from '../bonus.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { GlobalConstants } from 'src/environments/GlobalConstants';
 import { CovidApiService } from '../covidapi.service';
@@ -107,7 +106,7 @@ export class BonusComponent implements OnInit {
     }
   }
 
-  // TODO: Practical 7 - complete the backend implementation only below
+  //Practical 7 - complete the backend implementation only below
   putDesc() {
 
     this.bonusService.putDesc(this.updateDesc,'covid/put/bonus').then(

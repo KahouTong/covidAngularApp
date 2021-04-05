@@ -12,17 +12,16 @@ export class CovidApiService {
   constructor(private httpClient: HttpClient, private confirmationDialogService: ConfirmationDialogService) { }
 
   private bonusUrl = 'http://localhost:8081/';
-// covid/get/latest
+
   public getCovid(getCovidUrl: string): any {
     return this.httpClient.get(this.bonusUrl+getCovidUrl, { responseType: 'text' });
   }
-// covid/get/desc
+
   public getCovidDesc(getDescUrl: string): any {
     return this.httpClient.get(this.bonusUrl+getDescUrl);
   }
 
   public deleteDesc(id: number, delUrl: string): Promise<any> {
-// covid/delete?id=
     return new Promise((resolve) => {
       return this.httpClient.delete(this.bonusUrl+delUrl+id).subscribe((data: any) => {
         console.log(data);
@@ -39,7 +38,6 @@ export class CovidApiService {
   }
 
   public addDesc(desc: string, addDescUrl: string): Promise<any> {
-// covid/add?desc=
     return new Promise((resolve) => {
       return this.httpClient.get(this.bonusUrl+addDescUrl+ desc).subscribe((data: any) => {
 
@@ -58,7 +56,6 @@ export class CovidApiService {
 
 
   public putDesc(body : any, putUrl: string): Promise<any> {
-// covid/put
     return new Promise((resolve) => {
       return this.httpClient.put(this.bonusUrl+putUrl, body).subscribe((data: any) => {
 
@@ -75,11 +72,10 @@ export class CovidApiService {
     });
   }
 
-    // TODO: Practical 7 - complete the implementation below
+    //Practical 7 - complete the implementation below
   // It should have a promise sync function 
 
   public addPost(body: any, addPostUrl: string): Promise<any>  {
-    // body.description = body.desc; url = covid/post
     return new Promise((resolve) => {
     return this.httpClient.post(this.bonusUrl+addPostUrl, body).subscribe((data: any) => {
       console.log(data);
@@ -94,7 +90,6 @@ export class CovidApiService {
   }
 
   public deleteDescSoap(desc: string, delSoapUrl: string): Promise<any>  {
-    // body.description = body.desc;covid/delete/soap?desc=
     return new Promise((resolve) => {
     return this.httpClient.delete(this.bonusUrl+delSoapUrl+ desc).subscribe((data: any) => {
       console.log(data);

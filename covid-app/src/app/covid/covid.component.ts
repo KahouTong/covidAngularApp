@@ -4,7 +4,6 @@ import { CovidApiService } from '../covidapi.service';
 import { ConfirmationDialogService } from '../confirmation-dialog/confirmation-dialog.service';
 import { GlobalConstants } from 'src/environments/GlobalConstants';
 import { GlobalMethods } from 'src/environments/GlobalMethods';
-import { CovidCasesDesc } from 'src/model/CovidCasesDesc';
 
 @Component({
   selector: 'app-covid',
@@ -124,7 +123,7 @@ export class CovidComponent implements OnInit {
     }
   }
 
-  // TODO: Practical 7 - complete the backend implementation only below
+  //Practical 7 - complete the backend implementation only below
   putDesc() {
 
     this.covidApiService.putDesc(this.updateDesc,'covid/put').then(
@@ -133,7 +132,7 @@ export class CovidComponent implements OnInit {
       });
   }
 
-  // TODO: Practical 7 - complete the implementation below
+  //Practical 7 - complete the implementation below
   // It should have a promise sync function 
 
   addPost() {

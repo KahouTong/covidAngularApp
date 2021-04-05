@@ -21,6 +21,7 @@ export class MiningComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
+    // This is intentional
   }
 
 mining: string = 'Covid Mining Service';

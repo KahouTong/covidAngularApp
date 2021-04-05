@@ -23,6 +23,7 @@ export class CovidbonusDeleteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // This is intentional
   }
 
 
